@@ -22,6 +22,8 @@ CordovaPluginCamera.prototype.onPhotoDataSuccess = function (imageData) {
     var theTemplateScript = $('#template-camera-image-small').html();
     var theTemplate = Handlebars.compile(theTemplateScript);
     $('#camera-images').append(theTemplate(smallImageObj));
+
+    this.onSuccess();
 };
 
 // Called when a photo is successfully retrieved
@@ -36,12 +38,12 @@ CordovaPluginCamera.prototype.onPhotoURISuccess = function (imageURI) {
     var theTemplate = Handlebars.compile(theTemplateScript);
     var theTemplatedData = theTemplate(largeImageObj);
     $('#camera-images').append(theTemplatedData);
+
+    this.onSuccess();
 };
 
 CordovaPluginCamera.prototype.capturePhoto = function () {
     var ThisClass = this;
-
-    alert(ThisClass.destinationType.DATA_URL);
 
     // Take picture using device camera and retrieve image as base64-encoded string
     navigator.camera.getPicture(this.onPhotoDataSuccess, this.onFail, {
@@ -81,6 +83,10 @@ CordovaPluginCamera.prototype.onFail = function (message) {
     var theTemplate = Handlebars.compile(theTemplateScript);
     $('#messages').empty();
     $('#messages').append(theTemplate(errorObj));
+};
+
+CordovaPluginCamera.prototype.onSuccess = function () {
+    $('#messages').empty();
 };
 
 var CordovaPluginCameraObj = new CordovaPluginCamera();
