@@ -23,7 +23,7 @@ CordovaPluginCamera.prototype.onPhotoDataSuccess = function (imageData) {
     var theTemplate = Handlebars.compile(theTemplateScript);
     $('#camera-images').append(theTemplate(smallImageObj));
 
-    this.onSuccess();
+    $('#messages').empty();
 };
 
 // Called when a photo is successfully retrieved
@@ -39,37 +39,31 @@ CordovaPluginCamera.prototype.onPhotoURISuccess = function (imageURI) {
     var theTemplatedData = theTemplate(largeImageObj);
     $('#camera-images').append(theTemplatedData);
 
-    this.onSuccess();
+    $('#messages').empty();
 };
 
 CordovaPluginCamera.prototype.capturePhoto = function () {
-    var ThisClass = this;
-
     // Take picture using device camera and retrieve image as base64-encoded string
     navigator.camera.getPicture(this.onPhotoDataSuccess, this.onFail, {
         quality: 50,
-        destinationType: ThisClass.destinationType.DATA_URL
+        destinationType: this.destinationType.DATA_URL
     });
 };
 
 CordovaPluginCamera.prototype.capturePhotoEdit = function () {
-    var ThisClass = this;
-
     // Take picture using device camera, allow edit, and retrieve image as base64-encoded string
     navigator.camera.getPicture(this.onPhotoDataSuccess, this.onFail, {
         quality: 20,
         allowEdit: true,
-        destinationType: ThisClass.destinationType.DATA_URL
+        destinationType: this.destinationType.DATA_URL
     });
 };
 
 CordovaPluginCamera.prototype.getPhoto = function (source) {
-    var ThisClass = this;
-
     // Retrieve image file location from specified source
     navigator.camera.getPicture(this.onPhotoURISuccess, this.onFail, {
         quality: 50,
-        destinationType: ThisClass.destinationType.FILE_URI,
+        destinationType: this.destinationType.FILE_URI,
         sourceType: source
     });
 };
@@ -85,30 +79,26 @@ CordovaPluginCamera.prototype.onFail = function (message) {
     $('#messages').append(theTemplate(errorObj));
 };
 
-CordovaPluginCamera.prototype.onSuccess = function () {
-    $('#messages').empty();
-};
-
 var CordovaPluginCameraObj = new CordovaPluginCamera();
 
-$(document).ready(function() {
-    document.addEventListener('deviceready', function(){
+$(document).ready(function () {
+    document.addEventListener('deviceready', function () {
         CordovaPluginCameraObj.onDeviceReady();
     }, false);
-    
-    $('#capture-photo').on('click', function(){
+
+    $('#capture-photo').on('click', function () {
         CordovaPluginCameraObj.capturePhoto();
     });
 
-    $('#capture-photo-edit').on('click', function(){
+    $('#capture-photo-edit').on('click', function () {
         CordovaPluginCameraObj.capturePhotoEdit();
     });
 
-    $('#get-photo-photo-library').on('click', function(){
+    $('#get-photo-photo-library').on('click', function () {
         CordovaPluginCameraObj.getPhoto(CordovaPluginCameraObj.getPictureSource().PHOTOLIBRARY);
     });
 
-    $('#get-photo-saved-photo-album').on('click', function(){
+    $('#get-photo-saved-photo-album').on('click', function () {
         CordovaPluginCameraObj.getPhoto(CordovaPluginCameraObj.getPictureSource().SAVEDPHOTOALBUM);
     });
 });
