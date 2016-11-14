@@ -15,4 +15,20 @@ document.addEventListener('deviceready', function() {
         var versionNum = 1.0;
         console.log(versionNum);
     });
+
+    ADB.targetLoadRequest(
+        function (value) {
+            // success
+            myTempVal = value;
+            console.log('success: ' + value);
+        },
+        function () {
+            // fail
+            myTempVal = null;
+            console.log('failure');
+        },
+        'all locations',
+        'none',
+        null
+    );
 }, false);

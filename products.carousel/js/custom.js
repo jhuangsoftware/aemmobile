@@ -15,7 +15,14 @@ ProductsCarousel.prototype.drawProductsCarousel = function (collection, ignoreEn
             // filter out entity to be ignored
             $.each(collectionEntities.entities, function () {
                 if (this.id != ignoreEntity.id) {
-                    filteredCollectionEntities.entities.push(this);
+                    var modifiedDate = new Date(this.metadata.modified);
+                    var today = new Date();
+                    var threeDaysAgo = new Date();
+                    threeDaysAgo.setDate(today.getDate() - 3);
+
+                    if(modifiedDate.getTime() > threeDaysAgo.getTime()) {
+                        filteredCollectionEntities.entities.push(this);
+                    }
                 }
             });
 
