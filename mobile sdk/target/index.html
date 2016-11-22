@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <title>Hello World</title>
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+    <script src="js/jquery-2.2.4.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/handlebars-v4.0.5.js"></script>
+    <script src="js/mobile.sdk.custom.js"></script>
+    <script id="template-message" type="text/x-handlebars-template">​
+        <div class="alert alert-{{messagetype}} alert-dismissible" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <strong>{{messageheading}}</strong> {{messagetext}}
+        </div>
+    ​</script>
+</head>
+<body>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-12">
+            <h3>Mobile SDK <span class="label label-default" id="mobile-sdk-version"></span></h3>
+            <br />
+            <form class="form-inline">
+                <div class="form-group">
+                    <div class="input-group">
+                        <div class="input-group-addon">mbox</div>
+                        <input type="text" class="form-control" id="mbox-name" value="target-global-mbox">
+                    </div>
+                </div>
+                <div class="btn btn-primary" id="test">TEST</div>
+            </form>
+        </div>
+    </div>
+    <br />
+    <div class="row">
+        <div id="output" class="col-sm-12">
+
+        </div>
+    </div>
+</div>
+</body>
+</html>
