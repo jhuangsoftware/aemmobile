@@ -43,7 +43,7 @@
                                 {{#if metadata.abstract}}
                                 <p>{{metadata.abstract}}</p>
                                 {{/if}}
-                                <a class="btn btn-sm btn-block btn-info" href="navto://{{metadata.entityName}}">Read More</a>
+                                <a class="btn btn-sm btn-block btn-info" href="navto://{{type}}/{{metadata.entityName}}">Read More</a>
                                 <br />
                             </div>
                         </div>
@@ -66,6 +66,11 @@
 </head>
 <body>
     <div class="container-fluid home">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="alert alert-warning">LOADING...</div>
+            </div>
+        </div>
     </div>
 </body>
 </html>

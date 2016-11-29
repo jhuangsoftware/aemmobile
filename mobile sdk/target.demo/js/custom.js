@@ -22,6 +22,7 @@ ProductsCarousel.prototype.drawProductsCarousel = function (collection) {
                     if (collectionEntities.entities.length == processedConnectionEntities.entities.length) {
                         var theTemplateScript = $('#template-products-carousel').html();
                         var theTemplate = Handlebars.compile(theTemplateScript);
+                        $('.home').empty();
                         $('.home').append(theTemplate(processedConnectionEntities));
                     }
                 });
