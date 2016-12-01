@@ -38,8 +38,6 @@ ProductsCarousel.prototype.drawProductsCarousel = function (collection, ignoreEn
                         var theTemplateScript = $('#template-products-carousel').html();
                         var theTemplate = Handlebars.compile(theTemplateScript);
                         $('.home').append(theTemplate(processedConnectionEntities));
-
-                        adobeDPS.Gesture.disableNavigation($('#products-carousel')[0]);
                     }
                 });
             });
