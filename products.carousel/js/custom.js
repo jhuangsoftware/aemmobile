@@ -9,22 +9,34 @@ ProductsCarousel.prototype.drawProductsCarousel = function (collection, ignoreEn
     if (collection.metadata.entityName) {
         collection.getChildren(function (data) {
             var collectionEntities = data;
-            var filteredCollectionEntities = {'entities': []};
+            var collectionEntitiesWithoutIgnoreEntity = {'entities': []};
+            var collectionEntitiesModifiedDateFiltered = {'entities': []};
+            var filteredCollectionEntities;
             var processedConnectionEntities = {'entities': []};
 
             // filter out entity to be ignored
             $.each(collectionEntities.entities, function () {
                 if (this.id != ignoreEntity.id) {
+                    collectionEntitiesWithoutIgnoreEntity.entities.push(this);
+
                     var modifiedDate = new Date(this.metadata.modified);
                     var today = new Date();
                     var threeDaysAgo = new Date();
                     threeDaysAgo.setDate(today.getDate() - 3);
 
                     if(modifiedDate.getTime() > threeDaysAgo.getTime()) {
-                        filteredCollectionEntities.entities.push(this);
+                        collectionEntitiesModifiedDateFiltered.entities.push(this);
                     }
                 }
             });
+
+            // smartly decide which collection to display
+            // use the collection that is not empty
+            if(collectionEntitiesModifiedDateFiltered.entities.length > 0){
+                filteredCollectionEntities = collectionEntitiesModifiedDateFiltered;
+            } else {
+                filteredCollectionEntities = collectionEntitiesWithoutIgnoreEntity;
+            }
 
             $.each(filteredCollectionEntities.entities, function () {
                 var thisEntity = this;
