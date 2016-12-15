@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <title>Products Carousel</title>
+
+    <!-- Bootstrap -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="js/jquery-2.2.4.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/handlebars-v4.0.5.js"></script>
+    <script src="js/custom.js"></script>
+
+    <script id="template-products-carousel" type="text/x-handlebars-template">​
+        <div class="row">
+            <div class="col-sm-12">
+                <div id="products-carousel" class="carousel slide" data-ride="carousel">
+                    <!-- Indicators -->
+                    <ol class="carousel-indicators">
+                        {{#each entities}}
+                        <li data-target="#products-carousel" data-slide-to="{{@index}}" {{#if @first}}class="active"{{/if}}></li>
+                        {{/each}}
+                    </ol>
+
+                    <!-- Wrapper for slides -->
+                    <div class="carousel-inner" role="listbox">
+                        {{#each entities}}
+                        <div class="item {{#if @first}}active{{/if}}">
+                            <img src="{{thumbnailimage}}" alt="{{title}}">
+                            <div class="carousel-caption">
+                                <h3>{{metadata.title}}</h3>
+                                {{#if metadata.abstract}}
+                                <p>{{metadata.abstract}}</p>
+                                {{/if}}
+                                <a class="btn btn-sm btn-block btn-info" href="navto://{{type}}/{{metadata.entityName}}">Read More</a>
+                                <br />
+                            </div>
+                        </div>
+                        {{/each}}
+                    </div>
+
+                    <!-- Controls -->
+                    <a class="left carousel-control" href="#products-carousel" role="button" data-slide="prev">
+                        <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+                        <span class="sr-only">Previous</span>
+                    </a>
+                    <a class="right carousel-control" href="#products-carousel" role="button" data-slide="next">
+                        <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+                        <span class="sr-only">Next</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    ​</script>
+</head>
+<body>
+    <div class="container-fluid home">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="alert alert-warning">LOADING...</div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
