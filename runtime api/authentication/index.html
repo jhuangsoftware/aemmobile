@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <title>Products Carousel</title>
+
+    <!-- Bootstrap -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/custom.css" rel="stylesheet">
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="js/jquery-2.2.4.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/handlebars-v4.0.5.js"></script>
+    <script src="js/custom.js"></script>
+
+    <script id="template-page" type="text/x-handlebars-template">​
+        <div class="row">
+            <div class="col-sm-6">
+                <img src="{{entity.thumbnailimage}}" class="img-responsive img-thumbnail"/>
+                <br />
+                <br />
+            </div>
+            <div class="col-sm-6">
+                <div class="panel panel-info">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Parent Collection Name</h3>
+                    </div>
+                    <div class="panel-body">
+                        {{collection.metadata.title}}
+                    </div>
+                </div>
+                <div class="panel panel-info">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Article Name</h3>
+                    </div>
+                    <div class="panel-body">
+                        {{entity.metadata.entityName}}
+                    </div>
+                </div>
+                <div class="panel panel-info">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Article Title</h3>
+                    </div>
+                    <div class="panel-body">
+                        {{entity.metadata.title}}
+                    </div>
+                </div>
+                <div class="panel panel-info">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Article Short Title</h3>
+                    </div>
+                    <div class="panel-body">
+                        {{entity.metadata.shortTitle}}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="panel panel-info">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Short Abstract</h3>
+                    </div>
+                    <div class="panel-body">
+                        {{entity.metadata.shortAbstract}}
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="panel panel-info">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Author</h3>
+                    </div>
+                    <div class="panel-body">
+                        {{entity.metadata.author}}
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="panel panel-info">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Department</h3>
+                    </div>
+                    <div class="panel-body">
+                        {{entity.metadata.department}}
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="panel panel-info">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Category</h3>
+                    </div>
+                    <div class="panel-body">
+                        {{entity.metadata.category}}
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="panel panel-info">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Keywords</h3>
+                    </div>
+                    <div class="panel-body">
+                        {{#each entity.metadata.keywords}}
+                        <span class="label label-default">{{this}}</span>
+                        {{/each}}
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="panel panel-info">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Article Access</h3>
+                    </div>
+                    <div class="panel-body">
+                        {{entity.metadata.accessState}}
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="panel panel-info">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Article Importance</h3>
+                    </div>
+                    <div class="panel-body">
+                        {{entity.metadata.importance}}
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="panel panel-info">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Article Importance</h3>
+                    </div>
+                    <div class="panel-body">
+                        {{entity.metadata.importance}}
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="panel panel-info">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Other Information</h3>
+                    </div>
+                    <div class="panel-body">
+                        <div><strong>id:</strong> {{entity.metadata.importance}}</div>
+                        <div><strong>created:</strong> {{entity.metadata.created}}</div>
+                        <div><strong>modified:</strong> {{entity.metadata.modified}}</div>
+                        <div><strong>published:</strong> {{entity.metadata.published}}</div>
+                        <div><strong>version:</strong> {{entity.metadata.version}}</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    ​</script>
+
+    <script id="template-login" type="text/x-handlebars-template">​
+        <div class="modal" id="authentication-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" data-backdrop="static">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-body">
+                        <div class="btn btn-primary btn-lg btn-block" id="sign-in">Sign In</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    ​</script>
+</head>
+<body>
+    <div class="container-fluid home">
+
+    </div>
+</body>
+</html>
